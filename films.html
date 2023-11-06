@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+    <title>US films</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Us_2019_film_logo.svg/2297px-Us_2019_film_logo.svg.png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Us_2019_film_logo.svg/2297px-Us_2019_film_logo.svg.png">
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Us_2019_film_logo.svg/2297px-Us_2019_film_logo.svg.png" alt="" width="100">
+              </a>
+          <a class="navbar-brand" href="index.html">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="films.html">Films</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacts.html">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+     </nav>
+
+    <main>
+    
+        <div class="container">
+            <div class="container mt-5">
+                <h2>Timer to watch all films</h2>
+                <div class="input-group mb-3">
+                    <input type="number" id="minutesInput" class="form-control" placeholder="Set minutes" min="1">
+                    <div class="input-group-append">
+                        <button id="startTimer" class="btn btn-primary">Start</button>
+                    </div>
+                </div>
+                <div id="timer" class="display-1 text-center">00:00</div>
+            </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+            const minutesInput = document.getElementById("minutesInput");
+            const startTimerButton = document.getElementById("startTimer");
+            const timerDisplay = document.getElementById("timer");
+        
+            let countdown;
+            
+            startTimerButton.addEventListener("click", function() {
+                const minutes = parseInt(minutesInput.value);
+                if (!isNaN(minutes) && minutes > 0) {
+                    const endTime = new Date().getTime() + minutes * 60 * 1000;
+                    startCountdown(endTime);
+                }
+            });
+        
+            function startCountdown(endTime) {
+                clearInterval(countdown);
+        
+                function updateTimer() {
+                    const currentTime = new Date().getTime();
+                    const timeLeft = endTime - currentTime;
+        
+                    if (timeLeft <= 0) {
+                        timerDisplay.textContent = "00:00";
+                        clearInterval(countdown);
+                    } else {
+                        const minutes = Math.floor(timeLeft / (1000 * 60));
+                        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
+                        const minutesStr = String(minutes).padStart(2, "0");
+                        const secondsStr = String(seconds).padStart(2, "0");
+        
+                        timerDisplay.textContent = `${minutesStr}:${secondsStr}`;
+                    }
+                }
+        
+                countdown = setInterval(updateTimer, 1000);
+                updateTimer();
+            }
+        });
+        
+            </script>
+            <h2>Films</h2>
+            <br>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Filter
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Ation</a>
+                  <a class="dropdown-item" href="#">Comedy</a>
+                  <a class="dropdown-item" href="#">Horror</a>
+                  <a class="dropdown-item" href="#">Drama</a>
+                  <a class="dropdown-item" href="#">Triller</a>
+
+                </div>
+              </div>    
+            <br>
+            <div class="row">
+                <!-- Фильм 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://cdn.smartfacts.ru/181234/igra-v-imitaciyu_0.jpg" class="card-img-top" alt="Игра в имитацию">
+                        <div class="card-body">
+                            <h5 class="card-title"><a>Игра в имитацию</a></h5>
+                            <p class="card-text">Год выпуска: 2014</p>
+                            <p class="card-text">Жанр: Драма</p>
+                            <p class="card-text">Краткое описание: Английский математик и логик Алан Тьюринг пытается взломать код немецкой шифровальной машины Энигма во время Второй мировой войны.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film1.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/movies/frames/50561949-2556287.jpeg" class="card-img-top" alt="Создатель">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Создатель</a></h5>
+                            <p class="card-text">Год выпуска: 2023</p>
+                            <p class="card-text">Жанр: Боевик/Приключения</p>
+                            <p class="card-text">Краткое описание: На фоне войны будущего между человечеством и силами искусственного интеллекта, Джошуа, закаленный в боях и бывший оперативный агент переживает исчезновение своей жены, и теперь ему предстоит найти и уничтожить Создателя — неуловимого архитектора, создавшего искусственный интеллект и таинственное оружие, способное положить конец войне и всему людскому роду.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film2.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://thumbs.dfs.ivi.ru/storage6/contents/4/e/155033c8d84b6c728d524d934a33c0.jpg/858x483/?q=85" class="card-img-top" alt="Манчестер у моря">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Манчестер у моря</a></h5>
+                            <p class="card-text">Год выпуска: 2016</p>
+                            <p class "card-text">Жанр: Драма</p>
+                            <p class="card-text">Краткое описание: Нелюдимый и погруженный в себя Ли работает слесарем в многоквартирном доме. Узнав, что его старший брат умер, Ли возвращается в родной городок. Он вспоминает свою жизнь в этом городе и страшную трагедию, произошедшую с его собственной семьей. Неожиданно он узнает, что в завещании брат указал его опекуном 16-летнего племянника. Через взаимоотношения с подростком Ли пытается найти смысл дальнейшего существования.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film3.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://thumbs.dfs.ivi.ru/storage28/contents/e/5/8503b7d85013a51d1b649c41329fe6.jpg/858x483/?q=85" class="card-img-top" alt="Дьявол в деталях">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Дьявол в деталях</a></h5>
+                            <p class="card-text">Год выпуска: 2021</p>
+                            <p class="card-text">Жанр: Криминал/Триллер</p>
+                            <p class="card-text">Краткое описание: Заместителя шерифа округа Керн Джо «Дики» Дикона отправляют в Лос-Анджелес – обычная командировка для сбора улик. Но там его втягивают в поиски серийного убийцы, который терроризирует город. Охоту на маньяка возглавляет Джим Бэкстер, сержант департамента шерифа Лос-Анджелеса. Его впечатляет полицейское чутье Дики, и он неофициально привлекает его к расследованию.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film4.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://www.kino-teatr.ru/art/5566/78487.jpg" class="card-img-top" alt="Олдбой">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Олдбой</a></h5>
+                            <p class="card-text">Год выпуска: 2003</p>
+                            <p class="card-text">Жанр: Триллер/Детективный фильм</p>
+                            <p class="card-text">Краткое описание: 1988 год. Обычного человека по имени О Дэ-су, заботливого отца и любящего мужа, похищают прямо по дороге домой. Он приходит в себя в странном помещении, представляющем собой импровизированную тюрьму. Дэ-су мучается вопросом «за что», но не находит ответа. Спустя год в новостях он видит репортаж о гибели своей жены. Самое страшное, что убийцей считают его. После пятнадцати лет заточения бедняга, наконец, выходит на свободу…</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film5.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 6 -->
+                <div class="col-md-4 mb-4">
+                    <div class ="card h-100">
+                        <img src="https://www.pluggedin.ru/images/1-bigTopImage_2023_05_08_23_10_50.jpeg" class="card-img-top" alt="Переводчик">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Переводчик</a></h5>
+                            <p class="card-text">Год выпуска: 2023</p>
+                            <p class="card-text">Жанр: Военный/Боевик</p>
+                            <p class="card-text">Краткое описание: Джон Кинли не помнит, как выжил, попав в окружение врага в Афганистане, но понимает, что обязан жизнью местному переводчику по имени Ахмед. Именно ему удалось отбить раненного Кинли и на себе вытащить через опасную территорию. Теперь чувство долга не дает Джону покоя и он решает рискнуть всем, чтобы вернуться за Ахмедом и его семьей. На обоих объявлена охота, действовать приходится в одиночку, но он понимает, что не может бросить своего товарища в беде.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film6.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 7 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://rg.ru/uploads/images/2022/07/21/orig_046.jpg" class="card-img-top" alt="Быстрее пули">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Быстрее пули</a></h5>
+                            <p class="card-text">Год выпуска: 2014</p>
+                            <p class="card-text">Жанр: Боевик/Триллер</p>
+                            <p class="card-text">Краткое описание: Пятеро наёмных убийц оказываются в одном сверхскоростном экспрессе. Они узнают, что их миссии связаны, и пытаются выяснить, кто и зачем собрал их вместе.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film7.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 8 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://api.kinoart.ru/storage/post/901/regular_detail_picture-a959591beba97aa7ef1377ecde2e14e4.jpg" class="card-img-top" alt="Реинкарнация">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Реинкарнация</a></h5>
+                            <p class="card-text">Год выпуска: 2018</p>
+                            <p class="card-text">Жанр: Ужасы/Независимое кино</p>
+                            <p class="card-text">Краткое описание: После смерти матери Энни Грэхем в её ранее спокойном доме начинает твориться нечто необъяснимое. Теперь под угрозой жизнь её близких. С каждым днём открываются новые ужасающие секреты их семьи.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film8.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 9 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://thumbs.dfs.ivi.ru/storage2/contents/5/9/997768162eb6c73c981d152ed0c1c3.jpg/858x483/?q=85" class="card-img-top" alt="Никто">
+                        <div class="card-body">
+                            <h5 class="card-title"><a>Никто</a></h5>
+                            <p class="card-text">Год выпуска: 2021</p>
+                            <p class="card-text">Жанр: Боевик/Триллер</p>
+                            <p class="card-text">Краткое описание: Непримечательный и незаметный человек живёт обычной жизнью, пока однажды, спасая женщину от нападения бандитов, не отправляет одного из хулиганов в больницу. Лишь позже он узнаёт, что это был брат влиятельного гангстера, который теперь жаждет мести.</p>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <a href="film9.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Фильм 10 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://whatisgood.ru/wp-content/uploads/2015/12/film-marsianin-2015-znaniya-glavnyj-bagazh-cheloveka.jpg" class="card-img-top" alt="Марсианин">
+                        <div class="card-body">
+                            <h5 class="card-title"><a >Марсианин</a></h5>
+                            <p class="card-text">Год выпуска: 2015</p>
+                            <p class="card-text">Жанр: Научная фантастика/Приключения</p>
+                            <p class="card-text">Краткое описание: Марсианская миссия «Арес-3» в процессе работы была вынуждена экстренно покинуть планету из-за надвигающейся песчаной бури. Инженер и биолог Марк Уотни получил повреждение скафандра во время песчаной бури. Сотрудники миссии, посчитав его погибшим, эвакуировались с планеты, оставив Марка одного.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="film10.html" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+
+
+            <h2>3 Best films of all time</h2>
+            <div class="row">
+
+
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://m.media-amazon.com/images/M/MV5BNjQ2NDA3MDcxMF5BMl5BanBnXkFtZTgwMjE5NTU0NzE@._V1_.jpg" class="card-img-top" alt="Film 1">
+                        <div class="card-body">
+                            <h5 class="card-title">The Shawshank Redemption</h5>
+                            <p class="card-text">Year: 1994</p>
+                            <p class="card-text">Genre: Action and Drama</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://ew.com/thmb/xGFU5QJGZ13NBR-sNhSn0PeDQBg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/interstellar-11-4cd43e5ca7c74190b7e92ed912cdb31b.jpg" class="card-img-top" alt="Film 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Interstellar</h5>
+                            <p class="card-text">Year: 2014</p>
+                            <p class="card-text">Genre: Drama</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://news.store.rambler.ru/img/ffe50041d73f7322b1e16601f52473f6?img-format=auto&img-1-resize=height:400,fit:max&img-2-filter=sharpen" class="card-img-top" alt="Film 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Titanic</h5>
+                            <p class="card-text">Year: 2021</p>
+                            <p class="card-text">Genre: Drama</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+        
+            </div>
+
+
+            <div class="container">
+                <form id="opinionForm">
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="nameInput" placeholder="Enter your name" aria-label="Your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="opinionTextarea" class="form-label">Your Opinion</label>
+                        <textarea class="form-control" id="opinionTextarea" rows="3" placeholder="Enter your opinion" aria-label="Your Opinion" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+            
+                <div id="confirmationMessage" style="display: none;">
+                    <p>Your opinion has been submitted and confirmed. Thank you!</p>
+                </div>
+            </div>
+
+            <div class="container mt-5">
+                <h2>Movie counter</h2>
+                <p>You have watched a total of <span id="filmCount">0</span> films.</p>
+                <button id="addFilmButton" class="btn btn-primary">Add One Film</button>
+            </div>
+            <br>
+            <div class="container">
+                <h2>The best soundtrack ever</h2>
+
+
+                <button id="playButton" class="btn btn-primary btn-lg">Play Sound</button>
+                <button id="pauseButton" class="btn btn-primary btn-lg">Pause Sound</button>
+                <audio id="audio" src="C:\Users\Madiyar\Downloads\stranger-things-124008.mp3"></audio>
+            </div>
+
+            <script>
+                const playButton = document.getElementById('playButton');
+                const pauseButton = document.getElementById('pauseButton');
+                const audio = document.getElementById('audio');
+        
+                playButton.addEventListener('click', function() {
+                    audio.play();
+                });
+        
+                pauseButton.addEventListener('click', function() {
+                    audio.pause();
+                });
+            </script>
+
+            <div class="col-md-4">
+                <div class="card film-card">
+                    Us-films, since 2023;    
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const filmCards = document.querySelectorAll(".film-card");
+            
+                    filmCards.forEach(function (filmCard) {
+                        filmCard.addEventListener("mouseover", function () {
+                            filmCard.style.opacity = "0.8"; 
+                            filmCard.style.transition = "opacity 0.3s"; 
+                        });
+            
+                        filmCard.addEventListener("mouseout", function () {
+                            filmCard.style.opacity = "1"; 
+                        });
+                    });
+                });
+            </script>
+
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Your existing code
+            
+                    // Add the code to track the number of films watched
+                    const filmCountElement = document.getElementById("filmCount");
+                    const addFilmButton = document.getElementById("addFilmButton");
+            
+                    let watchedFilmsCount = 0;
+            
+                    addFilmButton.addEventListener('click', function () {
+                        watchedFilmsCount++;
+                        filmCountElement.textContent = watchedFilmsCount;
+                    });
+                });
+            </script>
+            
+            
+            
+            
+            
+            
+
+            
+            <script>
+                const form = document.getElementById('opinionForm');
+                const confirmationMessage = document.getElementById('confirmationMessage');
+            
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();     
+            
+                    setTimeout(function () {
+                        form.style.display = 'none';
+                        confirmationMessage.style.display = 'block';
+                    }, 2000); 
+                });
+            </script>
+            
+
+        
+        
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+</body>
+</html>
